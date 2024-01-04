@@ -165,7 +165,7 @@ def parallel_file_path(file_path, alternative_extension):
 
 
 def rat_print(
-    file_input, file_path, team_solution, old_latex=False, pdf=True, teamonly=False
+    file_input, file_path, team_solution, old_latex=False, pdf=True, teamonly=False, stickers=False
 ):
     """
     Create a document with RATs for all students and all teams.
@@ -207,7 +207,7 @@ def rat_print(
     sd.store(solutions_file_path)
     tell("Write solutions into file {}.".format(solutions_file_path))
 
-    latex = questionaire.write_latex(sd, t.teams, t.students, old_latex, teamonly)
+    latex = questionaire.write_latex(sd, t.teams, t.students, old_latex, teamonly, stickers)
     if pdf:
         pdf_file_name = os.path.splitext(os.path.basename(file_path))[0] + ".pdf"
         tell("Creating PDF...")
@@ -554,11 +554,17 @@ def trial(file):
     help="Only create the pages for the teams, not the individual RATs.",
 )
 @click.option(
+    "--stickers",
+    default=False,
+    is_flag=True,
+    help="Create Team RATs directly on page so that 'scratch stickers' can be added directly.",
+)
+@click.option(
     "--teamsolution",
     # prompt="Team solution",
     help="Code of the team scratch card or team solution.",
 )
-def print_(file, teamsolution, nopdf, teamonly):
+def print_(file, teamsolution, nopdf, teamonly, stickers):
     """
     Print a RAT before class.
     """
@@ -575,6 +581,7 @@ def print_(file, teamsolution, nopdf, teamonly):
                     teamsolution,
                     pdf=pdf,
                     teamonly=teamonly,
+                    stickers=stickers,
                 )
     else:
         rat_print(
@@ -583,6 +590,7 @@ def print_(file, teamsolution, nopdf, teamonly):
             teamsolution,
             pdf=pdf,
             teamonly=teamonly,
+            stickers=stickers,
         )
 
 

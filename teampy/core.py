@@ -428,6 +428,7 @@ class Questionaire:
         students=None,
         old_latex=False,
         teamonly=False,
+        stickers=False,
     ):
         course, date = "", ""
         page_break = "\\cleardoublepage\n\\newpage\n\n"
@@ -495,13 +496,46 @@ class Questionaire:
                     + "\n\n"
                 )
             else:
-                lines.append(
-                    "\\teamprefix"
-                    + "{{{}}}{{{}}}{{{}}}{{{}}}".format(
-                        team_id, course, self.title, date
+                if stickers:
+                    # Write 'scratchcards' directly into LaTeX
+
+                    # LaTeX does not support more than 9 arguments
+                    # the prefix was broken into two parts
+                    cmd_args=""
+                    for count, option in enumerate(solution.answers):
+				    	# only get the first 5 answers
+                        if count > 4:
+                            break
+                        cmd_args+="{{{}}}".format(option)
+
+				    # First part of the command
+                    lines.append(
+                        "\\teamprefixstick" + cmd_args
                     )
-                    + "\n\n"
-                )
+
+				    # Continue with the second part
+                    cmd_args=""
+                    # Note: we support a max of 10 answers, so we're adding spaces if missing
+                    for option in (solution.answers + [' '] * 5)[5:]:
+                        cmd_args+="{{{}}}".format(option)
+
+                    lines.append(
+                        "\\teamprefixsticks"
+                        + "{{{}}}{{{}}}{{{}}}{{{}}}".format(
+                            team_id, course, self.title, date
+                        )
+				    	+ cmd_args
+                        + "\n\n"
+                    )
+                else:
+                    lines.append(
+                        "\\teamprefix"
+                        + "{{{}}}{{{}}}{{{}}}{{{}}}".format(
+                            team_id, course, self.title, date
+                        )
+                        + "\n\n"
+                    )
+                #end of if for stickers
 
             for question in self.questions:
                 key = solution.answers[question.number - 1]

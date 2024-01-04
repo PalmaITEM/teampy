@@ -1,4 +1,4 @@
-\documentclass[10pt, twoside, twocolumn]{extarticle}
+\documentclass[10pt, twoside, twocolumn, table]{extarticle}
 \usepackage[utf8]{inputenc}
 
 \usepackage[left=1cm, right=1cm, top=1cm, bottom=1cm, portrait, a4paper]{geometry}
@@ -45,6 +45,7 @@
 
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
+\usepackage{array}
 \usepackage{tabularx}
 \usepackage{booktabs}
 
@@ -104,6 +105,68 @@ Team: & \textbf{#1}\\
 \end{tabular}\\%
 \rule{\linewidth}{0.4pt}
 \vfill
+}%
+
+% LaTeX only supports 9 arguments max
+% breaking it into two commands (5 questions x 2)
+\newcommand{\teamprefixstick}[5]{%
+\begin{center}
+\Large\textbf{Scratch off to reveal the answer}
+\end{center}
+\begin{table}[h]
+\centering
+\setlength{\tabcolsep}{4mm} % for the horizontal padding
+\renewcommand{\arraystretch}{1.5}% for the vertical padding
+\rowcolors{2}{gray!25}{white}
+\begin{tabular}{>{\centering\arraybackslash}m{4mm}>{\centering\arraybackslash}m{11mm}>{\centering\arraybackslash}m{11mm}>{\centering\arraybackslash}m{11mm}>{\centering\arraybackslash}m{11mm}}
+ & A & B & C & D \\
+\hline
+1. & \ifthenelse{\equal{#1}{a}}{x}{} & \ifthenelse{\equal{#1}{b}}{x}{} & \ifthenelse{\equal{#1}{c}}{x}{} & \ifthenelse{\equal{#1}{d}}{x}{} \\
+\hline
+\addlinespace[4mm] % Adds a space of 4mm
+\rowcolor{gray!50}
+2. & \ifthenelse{\equal{#2}{a}}{x}{} & \ifthenelse{\equal{#2}{b}}{x}{} & \ifthenelse{\equal{#2}{c}}{x}{} & \ifthenelse{\equal{#2}{d}}{x}{} \\
+\addlinespace[4mm] % Adds a space of 4mm
+\hline % Adds a horizontal line
+3. & \ifthenelse{\equal{#3}{a}}{x}{} & \ifthenelse{\equal{#3}{b}}{x}{} & \ifthenelse{\equal{#3}{c}}{x}{} & \ifthenelse{\equal{#3}{d}}{x}{} \\
+\hline
+\addlinespace[4mm] % Adds a space of 4mm
+4. & \ifthenelse{\equal{#4}{a}}{x}{} & \ifthenelse{\equal{#4}{b}}{x}{} & \ifthenelse{\equal{#4}{c}}{x}{} & \ifthenelse{\equal{#4}{d}}{x}{} \\
+\addlinespace[4mm] % Adds a space of 4mm
+\hline % Adds a horizontal line
+5. & \ifthenelse{\equal{#5}{a}}{x}{} & \ifthenelse{\equal{#5}{b}}{x}{} & \ifthenelse{\equal{#5}{c}}{x}{} & \ifthenelse{\equal{#5}{d}}{x}{} \\
+\hline
+\addlinespace[4mm] % Adds a space of 4mm
+}%
+
+% Second part of the command
+% 5 questions + small header
+\newcommand{\teamprefixsticks}[9]{%
+6. & \ifthenelse{\equal{#5}{a}}{x}{} & \ifthenelse{\equal{#5}{b}}{x}{} & \ifthenelse{\equal{#5}{c}}{x}{} & \ifthenelse{\equal{#5}{d}}{x}{} \\
+\addlinespace[4mm] % Adds a space of 4mm
+\hline % Adds a horizontal line
+7. & \ifthenelse{\equal{#6}{a}}{x}{} & \ifthenelse{\equal{#6}{b}}{x}{} & \ifthenelse{\equal{#6}{c}}{x}{} & \ifthenelse{\equal{#6}{d}}{x}{} \\
+\hline
+\addlinespace[4mm] % Adds a space of 4mm
+8. & \ifthenelse{\equal{#7}{a}}{x}{} & \ifthenelse{\equal{#7}{b}}{x}{} & \ifthenelse{\equal{#7}{c}}{x}{} & \ifthenelse{\equal{#7}{d}}{x}{} \\
+\addlinespace[4mm] % Adds a space of 4mm
+\hline % Adds a horizontal line
+9. & \ifthenelse{\equal{#8}{a}}{x}{} & \ifthenelse{\equal{#8}{b}}{x}{} & \ifthenelse{\equal{#8}{c}}{x}{} & \ifthenelse{\equal{#8}{d}}{x}{} \\
+\hline
+\addlinespace[4mm] % Adds a space of 4mm
+10. & \ifthenelse{\equal{#9}{a}}{x}{} & \ifthenelse{\equal{#9}{b}}{x}{} & \ifthenelse{\equal{#9}{c}}{x}{} & \ifthenelse{\equal{#9}{d}}{x}{} \\
+\end{tabular}
+%}
+\end{table}
+\addthumb{}{#1}{white}{black}
+\vfill
+\begin{tabular}{@{}ll}%
+\ifthenelse{\not\equal{#2}{}}{Course: & \textbf{#2}\\}{}%
+RAT: & \textbf{#3} \\
+\ifthenelse{\not\equal{#4}{}}{Date: & \textbf{#4}\\}{}%
+Team: & \textbf{#1}\\
+\end{tabular}\\%
+\rule{\linewidth}{0.4pt}
 }%
 
 \newcommand{\teamprefixnuts}[5]{%
