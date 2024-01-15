@@ -117,14 +117,14 @@ Team: & \textbf{#1}\\
 \centering
 \setlength{\tabcolsep}{4mm} % for the horizontal padding
 \renewcommand{\arraystretch}{1.5}% for the vertical padding
-\rowcolors{2}{gray!25}{white}
+\rowcolors{2}{gray!50}{white}
 \begin{tabular}{>{\centering\arraybackslash}m{4mm}>{\centering\arraybackslash}m{11mm}>{\centering\arraybackslash}m{11mm}>{\centering\arraybackslash}m{11mm}>{\centering\arraybackslash}m{11mm}}
  & A & B & C & D \\
 \hline
 1. & \ifthenelse{\equal{#1}{a}}{x}{} & \ifthenelse{\equal{#1}{b}}{x}{} & \ifthenelse{\equal{#1}{c}}{x}{} & \ifthenelse{\equal{#1}{d}}{x}{} \\
 \hline
 \addlinespace[4mm] % Adds a space of 4mm
-\rowcolor{gray!50}
+%\rowcolor{gray!50}
 2. & \ifthenelse{\equal{#2}{a}}{x}{} & \ifthenelse{\equal{#2}{b}}{x}{} & \ifthenelse{\equal{#2}{c}}{x}{} & \ifthenelse{\equal{#2}{d}}{x}{} \\
 \addlinespace[4mm] % Adds a space of 4mm
 \hline % Adds a horizontal line
