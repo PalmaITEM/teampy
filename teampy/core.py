@@ -1380,16 +1380,16 @@ class Result:
                 "  "
                 + Style.NORMAL
                 + "A: "
-                + fill * int(scores[0] * bar_width / 100)
-                + " {0:.1f}".format(scores[0])
+                + fill * int(scores.iloc[0] * bar_width / 100)
+                + " {0:.1f}".format(scores.iloc[0])
             )
             for i in range(1, len(scores)):
                 print(
                     "  "
                     + Style.DIM
                     + "{}: ".format(chr(65 + i))
-                    + fill * int(scores[i] * bar_width / 100)
-                    + " {0:.1f}".format(scores[i])
+                    + fill * int(scores.iloc[i] * bar_width / 100)
+                    + " {0:.1f}".format(scores.iloc[i])
                 )
 
         def print_in_console(df_i):
@@ -1425,7 +1425,7 @@ class Result:
                 lines.append('    <div class="progress">')
                 lines.append(
                     '    <div class="progress-bar {}" role="progressbar" style="width: {:.1f}%">{:.1f}%</div>'.format(
-                        bar, scores[i], scores[i]
+                        bar, scores.iloc[i], scores.iloc[i]
                     )
                 )
                 lines.append("    </div>")
