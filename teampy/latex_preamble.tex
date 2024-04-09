@@ -73,6 +73,7 @@
     innerleftmargin=10pt,
     backgroundcolor=white}
 
+\usepackage{letltxmacro}
 \LetLtxMacro{\OldIncludegraphics}{\includegraphics}
 \renewcommand{\includegraphics}[2][]{\OldIncludegraphics[width=\linewidth, #1]{#2}}
 \renewcommand{\caption}{}
